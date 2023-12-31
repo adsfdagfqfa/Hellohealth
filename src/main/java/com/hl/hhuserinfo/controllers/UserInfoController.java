@@ -20,9 +20,6 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @Autowired
-    private FollowUserRepository followUserRepository;
-
     @GetMapping("/getUserInfo")
     public ResultData getUserInfo(Integer userId){
         // TODO 因为使用的是sa-token登录，那么如何获得当前会话的userID呢？
