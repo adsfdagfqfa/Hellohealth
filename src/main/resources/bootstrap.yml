@@ -1,0 +1,14 @@
+# Nacos帮助文档: https://nacos.io/zh-cn/docs/concepts.html
+spring:
+  application:
+    name: userInfoService
+  # Nacos认证信息
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        # Nacos 服务发现与注册配置，其中子属性 server-addr 指定 Nacos 服务器主机和端口
+        server-addr: 8.130.77.190:8848
+        # 注册到 nacos 的指定 namespace，默认为 public
+        namespace: public
