@@ -16,7 +16,7 @@ public class HBRecord {
     @Column(name = "RECORD_ID")
     Integer RECORD_ID;
     @Column(name = "USER_ID")
-    Integer USER_ID;
+    Integer userId;
     @Column(name="CHANGE_NUM")
     Integer CHANGE_NUM;
     @Column(name="CHANGE_TIME")

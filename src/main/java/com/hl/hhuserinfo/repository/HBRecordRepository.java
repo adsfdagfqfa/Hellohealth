@@ -9,6 +9,6 @@ import java.util.List;
 
 
 public interface HBRecordRepository extends JpaRepository<HBRecord,Integer> {
-    List<HBRecord> findByUSER_ID(Integer userId);
+    List<HBRecord> findByUserId(Integer userId);
     
 }

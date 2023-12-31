@@ -54,7 +54,7 @@ public class HBRecordServiceImpl implements HBRecordService {
             if (user_id != null) {
                 System.out.println(user_id);
                 List<RecordInfo> recordInfo = new ArrayList<>();
-                List<HBRecord> lists = hbRecordRepository.findByUSER_ID(user_id);
+                List<HBRecord> lists = hbRecordRepository.findByUserId(user_id);
                 if(lists.isEmpty()){
                     return ResultData.fail("查找数据库为空");
                 }
@@ -106,7 +106,7 @@ public class HBRecordServiceImpl implements HBRecordService {
 
                     //修改HB记录表
                     HBRecord record = new HBRecord();
-                    record.setUSER_ID(user_id);
+                    record.setUserId(user_id);
                     record.setCHANGE_NUM(HBs);
                     record.setCHANGE_TIME(LocalDateTime.now());
                     record.setCHANGE_REASON( "充值" + HBs + "枚杏仁币");
