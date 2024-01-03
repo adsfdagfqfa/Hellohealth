@@ -57,8 +57,7 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/hellohealth:userinfo
             (docker rm -f userinfo || true)
-            docker run --name=userinfo -e SPRING_CLOUD_NACOS_DISCOVERY_IP=${{
-            secrets.HOST }} -d -p 8090:8080 ${{ secrets.DOCKER_HUB_USERNAME
+            docker run --name=userinfo -d -p 8090:8080 ${{ secrets.DOCKER_HUB_USERNAME
             }}/hellohealth:userinfo
             docker image prune -af
 
