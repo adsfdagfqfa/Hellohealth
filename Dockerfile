@@ -1,6 +1,6 @@
 FROM amazoncorretto:17.0.5
 
-ADD target/CollegeInfo-0.0.1-SNAPSHOT.jar app.jar
+ADD target/HHUserInfo-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
