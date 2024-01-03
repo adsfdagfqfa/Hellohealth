@@ -12,21 +12,21 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("api/ToDoList")
+@RequestMapping("api/toDoList")
 public class ListController {
 
     @Autowired
     ToDoListService toDoListService;
-    @GetMapping("/GetEvents")
+    @GetMapping("/getEvents")
     public String getEvents(Integer userId){
 
         return toDoListService.getEvents(userId);
     }
-    @PostMapping("/EditEvents")
+    @PostMapping("/editEvents")
     public String editEvents(Event front_end_data){
         return toDoListService.editEvent(front_end_data);
     }
-    @PostMapping("/RemoveEvents")
+    @PostMapping("/removeEvents")
     public String removeEvent(Event front_end_data){
         return toDoListService.removeEvent(front_end_data);
     }

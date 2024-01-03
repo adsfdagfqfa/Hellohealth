@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("api/Notification")
+@RequestMapping("api/notification")
 public class NotificationController {
     @Autowired
     NotificationService notificationService;
-    @GetMapping("/GetNotices")
+    @GetMapping("/getNotices")
     public String getEvents(Integer userId){
 
         return notificationService.GetNotices(userId);
     }
-    @PostMapping("/ClearNotices")
+    @PostMapping("/clearNotices")
     public String editEvents(Integer userId){
 
         return notificationService.ClearNotices(userId);
