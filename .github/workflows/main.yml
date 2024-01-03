@@ -52,7 +52,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           user: ${{ secrets.HOST_USER }}
-          key: ${{ secrets.SSH_PRIVATEKEY }}
+          password: ${{ secrets.SSH_PRIVATEKEY }}
           script: |
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/hellohealth:userinfo
             (docker rm -f userinfo || true)
