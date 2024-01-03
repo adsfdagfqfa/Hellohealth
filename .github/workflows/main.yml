@@ -45,7 +45,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/hello-health:UserInfo
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/hello-health:userinfo
       # push后，用ssh连接服务器执行脚本
       - name: SSH
         uses: cross-the-world/ssh-pipeline@v1.2.0
@@ -54,11 +54,11 @@ jobs:
           user: ${{ secrets.HOST_USER }}
           key: ${{ secrets.SSH_PRIVATEKEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/hello-health:UserInfo
-            (docker rm -f collegeinfo || true)
-            docker run --name=collegeinfo -e SPRING_CLOUD_NACOS_DISCOVERY_IP=${{
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/hello-health:userinfo
+            (docker rm -f userinfo || true)
+            docker run --name=userinfo -e SPRING_CLOUD_NACOS_DISCOVERY_IP=${{
             secrets.HOST }} -d -p 8090:8080 ${{ secrets.DOCKER_HUB_USERNAME
-            }}/hello-health:UserInfo
+            }}/hello-health:userinfo
             docker image prune -af
 
 
