@@ -25,14 +25,14 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public String getEvents()
+    public String getEvents(Integer userId)
     {
         Message message = new Message();
         try
         {
             message.errorCode = 404;
             //Integer user_id = (Integer)session.getAttribute("UserID");
-            Integer user_id = 121;
+            Integer user_id = userId;
             if(user_id == null)
             {
                 message.errorCode = 403;
@@ -83,12 +83,12 @@ public class ToDoListServiceImpl implements ToDoListService {
         return message.ReturnJson();
     }
     @Override
-    public String editEvent( Event front_end_data, HttpSession session){
+    public String editEvent( Event front_end_data){
         Message message = new Message();
         try {
             message.errorCode = 404;
             //Integer user_id = (Integer)session.getAttribute("UserID");
-            Integer user_id = 121;
+            Integer user_id = front_end_data.getUserId();
             if (user_id == null)
             {
                 message.errorCode = 404;
@@ -147,14 +147,14 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
     @Transactional
     @Override
-    public String removeEvent(Event front_end_data, HttpSession session)
+    public String removeEvent(Event front_end_data)
     {
         Message message = new Message();
         try {
             message.errorCode = 404;
             System.out.println("删除提醒事项");
             //Integer user_id = (Integer) session.getAttribute("UserID");
-            Integer user_id = 121;
+            Integer user_id = front_end_data.getUserId();
             if (user_id == null)
             {
                 message.errorCode = 404;

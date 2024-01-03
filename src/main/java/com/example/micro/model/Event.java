@@ -12,4 +12,5 @@ public class Event {
     public String priority;
     public Integer notify ;
     public Integer interval ;
+    public Integer userId;
 }
