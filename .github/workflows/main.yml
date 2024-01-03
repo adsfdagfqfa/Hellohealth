@@ -19,13 +19,13 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      # - name: Dependies Cache
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ~/.m2/repository
-      #     key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-maven-
+      - name: Dependies Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
         # 编译打包
       - name: Build with Maven
         run: mvn clean package -Dmaven.test.skip=true
