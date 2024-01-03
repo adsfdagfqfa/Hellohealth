@@ -43,6 +43,26 @@
             <artifactId>fastjson2</artifactId>
             <version>2.0.42</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version> 3.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2021.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>2021.1</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -74,7 +94,8 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.micro.MicroApplication</mainClass>
-                    <skip>true</skip>
+                    <!--<skip>true</skip>-->
+                    <classifier>exec</classifier>
                 </configuration>
                 <executions>
                     <execution>
