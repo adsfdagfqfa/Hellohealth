@@ -45,7 +45,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/hello-health:test
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }} /hello-health:test
       # push后，用ssh连接服务器执行脚本
       - name: SSH
         uses: cross-the-world/ssh-pipeline@v1.2.0
