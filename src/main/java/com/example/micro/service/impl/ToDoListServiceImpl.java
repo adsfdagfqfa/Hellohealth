@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class ToDoListServiceImpl implements ToDoListService {
                 _event.end=event.endTime;
                 _event.title = event.content;
                 _event.priority = event.importance;
-                _event.notify=event.reminder;
+                _event.notify=(event.reminder!=0);
                 _event.interval = event.interval;
                 YourEvents.add(_event);
             }
@@ -100,7 +101,7 @@ public class ToDoListServiceImpl implements ToDoListService {
             Long end_time =front_end_data.getEnd();
             String content = front_end_data.getTitle();
             String importance = front_end_data.getPriority();
-            Integer reminder = front_end_data.getNotify();
+            Integer reminder =  front_end_data.getNotify()?1:0;
             Integer interval = front_end_data.getInterval();
             if (task_id == null)
             {
@@ -154,6 +155,7 @@ public class ToDoListServiceImpl implements ToDoListService {
             message.errorCode = 404;
             System.out.println("删除提醒事项");
             //Integer user_id = (Integer) session.getAttribute("UserID");
+            System.out.println(front_end_data);
             Integer user_id = front_end_data.getUserId();
             if (user_id == null)
             {

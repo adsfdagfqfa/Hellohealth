@@ -28,6 +28,7 @@ public class ListController {
     }
     @PostMapping("/removeEvents")
     public String removeEvent(Event front_end_data){
+
         return toDoListService.removeEvent(front_end_data);
     }
 }

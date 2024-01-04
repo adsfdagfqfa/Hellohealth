@@ -10,7 +10,7 @@ public class Event {
     public Long end ;
     public String title ;
     public String priority;
-    public Integer notify ;
+    public Boolean notify ;
     public Integer interval ;
     public Integer userId;
 }
