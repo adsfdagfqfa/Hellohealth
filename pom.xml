@@ -102,6 +102,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
+
+                    <mainClass>com.hl.hhuserinfo.HhUserInfoApplication</mainClass>
+                    
                     <source>11</source>
                     <target>11</target>
                     <encoding>UTF-8</encoding>
