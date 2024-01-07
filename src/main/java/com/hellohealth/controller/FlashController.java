@@ -3,17 +3,19 @@ package com.hellohealth.controller;
 import com.hellohealth.entity.dto.TagGroupDTO;
 import com.hellohealth.entity.po.FlashTag;
 import com.hellohealth.entity.request.ModifyFlashRequest;
+import com.hellohealth.service.FlashService;
 import com.hellohealth.service.Impl.FlashServiceImpl;
 import com.hellohealth.entity.po.Flash;
 import com.hellohealth.entity.returnParam.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-@RequestMapping("/flash")
+@RequestMapping("/api/v1/flash")
 @RestController
 public class FlashController {
     @Autowired
@@ -134,7 +136,12 @@ public class FlashController {
         Flash flash = new Flash();
         flash.setFlashContent(modifyFlashRequest.getContent());
         flash.setFlashTitle(modifyFlashRequest.getTitle());
-        flash.setFlashImage(null);
+        //将图片设成由content中http开头,的第一个图片
+        String content = modifyFlashRequest.getContent();
+        int start = content.indexOf("http");
+        int end = content.indexOf("\"",start);
+        flash.setFlashImage(content.substring(start,end));
+
         //将flash的time设置为当前系统时间
         flash.setFlashTime(new java.sql.Date(new Date().getTime()));
         flash.setAdminId(41);//TODO:这里的admin_id需要从登录子系统获取
@@ -208,6 +215,8 @@ public class FlashController {
             return new Result<List<Flash>>().isSuccess(flashList);
         }
     }
+
+
 
 }
 
