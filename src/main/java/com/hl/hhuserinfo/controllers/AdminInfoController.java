@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/admin")
+@RequestMapping("/api/v1/userInfoService/admin")
 public class AdminInfoController {
     @Autowired
     private AdminService adminService;
@@ -18,9 +18,8 @@ public class AdminInfoController {
         return adminService.modifyAdminInfo(1,email.getEmail());
     }
 
-    @GetMapping("/Details")
+    @GetMapping("/details")
     public ResultData getAdminDetails(){
-        // TODO
         return adminService.getAdminInfoDetails(1);
     }
 }

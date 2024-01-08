@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/api/v1/HB")
+@RequestMapping("/api/v1/userInfoService/HB")
 public class HBRecordController {
     @Autowired
     private HBRecordService hbRecordService;

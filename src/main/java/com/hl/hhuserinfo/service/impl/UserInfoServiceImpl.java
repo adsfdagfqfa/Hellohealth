@@ -116,7 +116,6 @@ public class UserInfoServiceImpl implements UserInfoService {
                 result.put("isFollowed",false); // 自己不能关注自己
             else {
                 // 找到session当中的ID对应的用户
-                // TODO 这里要改成从session或者哪里获取ID
                 Optional<UserInfo> sessionUserOrNULL = userInfoRepository.findById(sessionUserId);
                 if(sessionUserOrNULL.isEmpty()){
                     return ResultData.notFound("session用户没找到");
@@ -160,8 +159,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             setFollowListInfo(fanUsers,fanInfos);
             result.put("fansList",fanInfos);
             return ResultData.ok(result);
-
-            // TODO //如果当前用户未登录，这一分支怎么处理？？
 
         }catch (Exception e){
             System.out.println(e);
@@ -408,7 +405,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public ResultData report(Integer sessionId) {
-        // TODO
         List<ReportInfo> reportInfos = commentReportRepository.findReportInfo(sessionId);
         List<ReportReturnInfo> returnInfos = new ArrayList<>();
         for(ReportInfo reportInfo: reportInfos){

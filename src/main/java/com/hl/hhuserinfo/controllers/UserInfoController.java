@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/userInfoService")
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
