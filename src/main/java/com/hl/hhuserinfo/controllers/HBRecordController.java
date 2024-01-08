@@ -6,16 +6,13 @@ import com.hl.hhuserinfo.service.HBRecordService;
 import com.hl.hhuserinfo.service.UserInfoService;
 import com.hl.hhuserinfo.service.impl.HBRecordServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/HB")
+@RequestMapping("/api/v1/HB")
 public class HBRecordController {
     @Autowired
     private HBRecordService hbRecordService;
@@ -23,11 +20,11 @@ public class HBRecordController {
     ResultData getRecord(HttpSession session){
         return hbRecordService.getRecord(session);
     }
-    @PostMapping("/check")
+    @PutMapping("/check")
     ResultData createOrder(HttpServletRequest request){
         return hbRecordService.createOrder(request);
     }
-    @PostMapping("/order")
+    @PutMapping("/order")
     ResultData checkOrder(CreateOrderParam front_end_data, HttpServletRequest request){
         return hbRecordService.checkOrder(front_end_data,request);
     }

@@ -15,43 +15,38 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @GetMapping("/getUserInfo")
+    @GetMapping("/info")
     public ResultData getUserInfo(Integer userId){
-        // TODO 因为使用的是sa-token登录，那么如何获得当前会话的userID呢？
-        // TODO 这里先传入userId测试使用，后面要换成从前端或者会话当中获取ID
         System.out.println(userId);
         UserInfo user = userInfoService.getUserInfoById(userId);
         return userInfoService.setReturnDataForGetUserInfo(user);
     }
 
-    @GetMapping("/getDetails")
+    @GetMapping("/details")
     public ResultData getDetails(Integer frontUserId,Integer sessionUserId){
-        // TODO session当中的Id怎么获取
         return userInfoService.getDetailedUserInfo(frontUserId,sessionUserId);
     }
 
-    @PostMapping("/modifyUserInfo")
+    @PutMapping("/info")
     public ResultData modifyUserInfo(@RequestBody ModifiedUserInfo modifiedUserInfo){
         Integer sessionUserId = 3;
         return userInfoService.modifyUserInfo(modifiedUserInfo,sessionUserId);
     }
 
-    @PostMapping("/uploadAvatar")
+    @PostMapping("/avatar")
     public ResultData uploadAvatar(List<MultipartFile> file){
-        // TODO 前端传文件的时候设置每个文件在form表单当中的key为file
         String url = userInfoService.uploadImage(file.get(0));
         if(url == null)
             return ResultData.fail("上传图片失败");
-        // TODO sessionID问题
         return userInfoService.setNewAvatar(url,3,null);
     }
 
-    @PostMapping("/uploadDoctorApproval")
+    @PutMapping("/doctorApproval")
     public ResultData uploadDoctorApproval(List<MultipartFile> files){
         if(files.size()!=2)
             return ResultData.fail("上传图片数目错误");
@@ -65,28 +60,26 @@ public class UserInfoController {
         return userInfoService.setDoctorApprovalInfo(urls,3);
     }
 
-    @PostMapping("/followUser")
+    @PostMapping("/follow")
     public ResultData followUser(@RequestBody FollowUser followUserID){
         Integer fUserId = Integer.parseInt(followUserID.getFollowUserID());
         Integer sUserId = 3;
-        // TODO sessionId问题的处理
         return userInfoService.followUser(fUserId,sUserId);
     }
 
-    @PostMapping("/unfollowUser")
+    @PostMapping("/unfollow")
     public ResultData unfollowUser(@RequestBody FollowUser followUserID){
         Integer fUserId = Integer.parseInt(followUserID.getFollowUserID());
         Integer sUserId = 3;
-        // TODO sessionId问题的处理
         return userInfoService.unfollowUser(fUserId,sUserId);
     }
 
-    @PostMapping("/fetchUserPosts")
+    @GetMapping("/posts")
     public ResultData fetchUserPosts(@RequestBody UserId userId){
         return userInfoService.fetchUserPosts(userId.getUser_id());
     }
 
-    @GetMapping("/Report")
+    @GetMapping("/report")
     public ResultData getReport(Integer sessionId){
         return userInfoService.report(sessionId);
     }
