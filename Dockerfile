@@ -1,4 +1,4 @@
-# 指定带有jdk21环境的镜像
+# 指定带有jdk17环境的镜像
 FROM openjdk:17
 
 COPY ./target/micro-0.0.1-SNAPSHOT-exec.jar .
