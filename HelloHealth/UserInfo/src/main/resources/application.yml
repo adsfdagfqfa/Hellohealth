@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: java
+    password: 12345678
+    url: jdbc:mysql://8.130.78.60:3306/microServices?allowPublicKeyRetrieval=TRUE
+  jpa:
+    database: mysql
+    show-sql: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+smms:
+  secretKey: SYmlkYwfXD82eRKMCYV2cdvVV5ASqcp5

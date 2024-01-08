@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: java
+    password: 12345678
+    url: jdbc:mysql://8.130.78.60:3306/microServices
+
+  jpa:
+    hibernate:
+      # 更新或创建数据库表结构
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      # 在控制台显示SQL
+      #show-sql: true
+    database: mysql
+    open-in-view: false
+    show-sql: true
+server:
+  port: 9099
