@@ -45,7 +45,7 @@ public class DoctorServiceImpl implements DoctorService {
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer) admin_id;
+            Integer adminId = Integer.parseInt(admin_id);
             // AdminId = 43;
             if (adminId == null)
             {
@@ -55,8 +55,8 @@ public class DoctorServiceImpl implements DoctorService {
             }
 //            Integer adminId = 42;
             //传入参数
-            String type = type;
-            if (!type.equals("unchecked") && !type.equals("checked"))
+            String type_ = type;
+            if (!type_.equals("unchecked") && !type_.equals("checked"))
             {
                 message.setMessage("type类型错误");
                 message.setErrorCode(400);
@@ -66,7 +66,7 @@ public class DoctorServiceImpl implements DoctorService {
             //从数据库中找到相应对象
             //_context.DetachAll();
             List<AuthenticationCheck> checks;
-            if (type.equals("unchecked")){
+            if (type_.equals("unchecked")){
                 //checks = _context.AuthenticationChecks.OrderBy(a => a.SubmitTime).ToList();//按提交时间，从旧到新排序
                 QueryWrapper<AuthenticationCheck> queryWrapper = new QueryWrapper<>();
                 queryWrapper.orderByAsc("submit_time");
@@ -82,7 +82,7 @@ public class DoctorServiceImpl implements DoctorService {
             for (AuthenticationCheck check : checks)
             {
                 ApplyData data = new ApplyData();
-                if (type.equals("checked"))//要获取已审核的
+                if (type_.equals("checked"))//要获取已审核的
                 {
                     if (check.getReviewStatus() == 2)//说明是未审核的则不需要
                         continue;
@@ -167,7 +167,7 @@ public class DoctorServiceImpl implements DoctorService {
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer) admin_id;
+            Integer adminId = Integer.parseInt(admin_id);
             //AdminId = 43;
             if (adminId == null)
             {
@@ -177,8 +177,8 @@ public class DoctorServiceImpl implements DoctorService {
             }
 //            Integer adminId = 42;
             //传入参数
-            Integer apply_id = (Integer)apply_id;
-            if (apply_id==null)
+            Integer apply_id_ = Integer.parseInt(apply_id);
+            if (apply_id_==null)
             {
                 message.setMessage("没有传入参数");
                 message.setErrorCode(400);
@@ -188,7 +188,7 @@ public class DoctorServiceImpl implements DoctorService {
             //从数据库中找到相应对象
             //_context.DetachAll();
             //AppliedDoctor appliedDoctor = _context.AppliedDoctors.Single(a => a.ApplyId ==apply_id);
-            AppliedDoctor appliedDoctor = appliedDoctorMapper.selectById(apply_id);
+            AppliedDoctor appliedDoctor = appliedDoctorMapper.selectById(apply_id_);
             Map<String,Object> data = message.getData();
             data.put("certification",appliedDoctor.getCertification());
             data.put("license",appliedDoctor.getLicense());

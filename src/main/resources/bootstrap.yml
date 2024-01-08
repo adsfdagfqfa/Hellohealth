@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: CheckService
+    # Nacos认证信息
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.130.100.218:8848
+        namespace: 98a85b64-1f68-469c-8052-2e3af62296b8
+      # Nacos 服务发现与注册配置，其中子属性 server-addr 指定 Nacos 服务器主机和端口server-addr: 8.130.100.218:8848
+      # 注册到 nacos 的指定 namespace，默认为 publicnamespace: 98a85b64-1f68-469c-8052-2e3af62296b8
+      config:
+        server-addr: 8.130.100.218:8848
+        file-extension: yaml
+        name: CheckService
+        group: DEFAULT_GROUP
+        namespace: 98a85b64-1f68-469c-8052-2e3af62296b8

@@ -59,7 +59,7 @@ public class ReportServiceImpl implements ReportService {
         message.setErrorCode(500);
         try{
             // 验证身份
-            Integer adminId = (Integer) admin_id;
+            Integer adminId = Integer.parseInt(admin_id);
             if (adminId == null) {
                 message.setErrorCode(403);
                 System.out.println("session中没有存Admin ID！");
@@ -68,8 +68,8 @@ public class ReportServiceImpl implements ReportService {
 //            Integer adminId=41;
 
             // 传入参数
-            String type = type.toLowerCase();
-            if (!type.equals("unchecked") && !type.equals("checked")) {
+            String type_ = type.toLowerCase();
+            if (!type_.equals("unchecked") && !type_.equals("checked")) {
                 message.setMessage("type类型错误");
                 message.setErrorCode(400);
                 return message.returnJson();
@@ -77,7 +77,7 @@ public class ReportServiceImpl implements ReportService {
 
             // 从数据库中找到相应对象
             List<CommentReport> reports;
-            if (type.equals("unchecked")) {
+            if (type_.equals("unchecked")) {
                 QueryWrapper<CommentReport> queryWrapper = new QueryWrapper<>();
                 queryWrapper.orderByDesc("report_time");
                 reports = commentReportMapper.selectList(queryWrapper);
@@ -95,9 +95,9 @@ public class ReportServiceImpl implements ReportService {
 
             List<ReportData> reportDataList = new ArrayList<>();
             for (CommentReport report : reports) {
-                if (type.equals("checked") && report.getReportStatus() == 2) {
+                if (type_.equals("checked") && report.getReportStatus() == 2) {
                     continue;
-                } else if (type.equals("unchecked") && report.getReportStatus() != 2) {
+                } else if (type_.equals("unchecked") && report.getReportStatus() != 2) {
                     continue;
                 }
                 // 加载数据
@@ -126,7 +126,7 @@ public class ReportServiceImpl implements ReportService {
         message.setErrorCode(500);
         try {
             // 验证身份
-            Integer adminId = (Integer) admin_id;
+            Integer adminId = Integer.parseInt(admin_id);
             if (adminId == null) {
                 message.setErrorCode(403);
                 System.out.println("session中没有存Admin ID！");
@@ -135,7 +135,7 @@ public class ReportServiceImpl implements ReportService {
 //            Integer adminId=41;
 
             // 传入参数
-            Integer reportId = (Integer)report_id;
+            Integer reportId = Integer.parseInt(report_id);
             System.out.println("现在查看的细节是关于："+ reportId.toString());
 
             // 从数据库中找到相应对象

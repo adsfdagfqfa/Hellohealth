@@ -43,7 +43,7 @@ public class FloorServiceImpl implements FloorService {
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer)admin_id;
+            Integer adminId = Integer.parseInt(admin_id);
             //AdminId = 42;
             if (adminId == null)
             {
@@ -54,8 +54,8 @@ public class FloorServiceImpl implements FloorService {
 //            Integer adminId = 42;
 
             //传入参数
-            String type = type.toLowerCase();
-            if (!type.equals("unchecked") && !type.equals("checked"))
+            String type_ = type.toLowerCase();
+            if (!type_.equals("unchecked") && !type_.equals("checked"))
             {
                 message.setMessage("type类型错误");
                 message.setErrorCode(400);
@@ -70,7 +70,7 @@ public class FloorServiceImpl implements FloorService {
             //加载每条审核对应的评论
                 floor.setComment(commentMapper.selectById(floor.getCommentId()));
             List<FloorCheck> checks;
-            if (type.equals("unchecked")){
+            if (type_.equals("unchecked")){
                 //checks = _context.FloorChecks.OrderBy(a => a.Comment.CommentTime).ToList();//按提交时间，从旧到新排序
                 QueryWrapper<FloorCheck> queryWrapperFloorCheck = new QueryWrapper<>();
                 queryWrapperFloorCheck.orderByAsc("comment_time");
@@ -86,7 +86,7 @@ public class FloorServiceImpl implements FloorService {
             for (FloorCheck check : checks)
             {
                 CheckData data = new CheckData();
-                if (type == "checked")//要获取已处理的
+                if (type_ == "checked")//要获取已处理的
                 {
                     if (check.getReviewStatus() == 2)//说明是未处理的
                         continue;
@@ -124,7 +124,7 @@ public class FloorServiceImpl implements FloorService {
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer) admin_id;
+            Integer adminId = Integer.parseInt(admin_id);
             //AdminId = 42;
             if (adminId == null)
             {
@@ -134,13 +134,13 @@ public class FloorServiceImpl implements FloorService {
             }
 //            Integer adminId = 42;
             //传入参数
-            int comment_id = (int)comment_id;
-            System.out.println("现在查看的细节是关于：" + comment_id);
+            int comment_id_ = Integer.parseInt(comment_id);
+            System.out.println("现在查看的细节是关于：" + comment_id_);
 
             //从数据库中找到相应对象
             //_context.DetachAll();
             //Comment comment=_context.Comments.Single(b=>b.CommentId == comment_id);
-            Comment comment = commentMapper.selectById(comment_id);
+            Comment comment = commentMapper.selectById(comment_id_);
             Map<String,Object> data = new HashMap<>();
             data.put("post_id",comment.getPostId());
             data.put("floor_number",comment.getFloorNumber());
