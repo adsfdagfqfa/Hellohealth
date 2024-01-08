@@ -57,7 +57,7 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/hellohealth:todolist
             (docker rm -f todolist || true)
-            docker run --name=todolist -d -p 8090:9099 ${{ secrets.DOCKER_HUB_USERNAME
+            docker run --name=todolist -d -p 9099:9099 ${{ secrets.DOCKER_HUB_USERNAME
             }}/hellohealth:todolist
             docker image prune -af
 
