@@ -38,12 +38,12 @@ public class FloorServiceImpl implements FloorService {
     private FollowUserMapper followUserMapper;
 
     @Override
-    public String checkFloors(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String checkFloors(String type,String admin_id) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer)session.getAttribute("AdminID");
+            Integer adminId = (Integer)admin_id;
             //AdminId = 42;
             if (adminId == null)
             {
@@ -54,7 +54,7 @@ public class FloorServiceImpl implements FloorService {
 //            Integer adminId = 42;
 
             //传入参数
-            String type = (frontEndData.get("type").toString()).toLowerCase();
+            String type = type.toLowerCase();
             if (!type.equals("unchecked") && !type.equals("checked"))
             {
                 message.setMessage("type类型错误");
@@ -119,12 +119,12 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
-    public String getTheFloor(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String getTheFloor(String comment_id,String admin_id) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) admin_id;
             //AdminId = 42;
             if (adminId == null)
             {
@@ -134,7 +134,7 @@ public class FloorServiceImpl implements FloorService {
             }
 //            Integer adminId = 42;
             //传入参数
-            int comment_id = (int)frontEndData.get("comment_id");
+            int comment_id = (int)comment_id;
             System.out.println("现在查看的细节是关于：" + comment_id);
 
             //从数据库中找到相应对象
@@ -158,14 +158,14 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
-    public String checkResult(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String checkResult(Map<String, Object> frontEndData) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         Map<String,Object> data = new HashMap<>();
         data.put("status",false);
         try
         {//首先，验证身份
-            Integer adminId =(Integer)session.getAttribute("AdminID");
+            Integer adminId =(Integer)frontEndData.get("AdminID");
             //AdminId = 42;
             if (adminId == null)
             {

@@ -6,9 +6,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 public interface DoctorService {
-    String doctorSortBy(Map<String,Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String doctorSortBy(String type,String admin_id) throws JsonProcessingException;
 
-    String doctorDetail(Map<String,Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String doctorDetail(String apply_id,String admin_id) throws JsonProcessingException;
 
-    String doctorSubmit(Map<String,Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String doctorSubmit(Map<String,Object> frontEndData) throws JsonProcessingException;
 }

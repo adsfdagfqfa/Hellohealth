@@ -13,24 +13,24 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/Check/Doctor")
+@RequestMapping("/api/v1/CheckService/check/doctor")
 public class CheckDoctorController {
 
     @Autowired
     private DoctorService doctorService;
 
-    @PostMapping("/SortBy")
-    String DoctorSortBy(@RequestBody Map<String,Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return doctorService.doctorSortBy(frontEndData,session);
+    @GetMapping("/sortBy")
+    String DoctorSortBy(@RequestParam String type,@RequestParam String admin_id) throws JsonProcessingException {
+        return doctorService.doctorSortBy(type,admin_id);
     }
 
-    @PostMapping("/Detail")
-    String DoctorDetail(@RequestBody Map<String,Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return doctorService.doctorDetail(frontEndData,session);
+    @GetMapping("/detail")
+    String DoctorDetail(@RequestParam String apply_id,@RequestParam String admin_id) throws JsonProcessingException {
+        return doctorService.doctorDetail(apply_id,admin_id);
     }
 
-    @PostMapping("/Submit")
-    String DoctorSubmit(@RequestBody Map<String,Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return doctorService.doctorSubmit(frontEndData,session);
+    @PostMapping("/submit")
+    String DoctorSubmit(@RequestBody Map<String,Object> frontEndData) throws JsonProcessingException {
+        return doctorService.doctorSubmit(frontEndData);
     }
 }

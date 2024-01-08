@@ -13,23 +13,23 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/Check/Floor")
+@RequestMapping("/api/v1/CheckService/check/floor")
 public class CheckFloorsController {
     @Autowired
     private FloorService floorService;
 
-    @PostMapping("/SortBy")
-    String CheckFloors(@RequestBody Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return floorService.checkFloors(frontEndData,session);
+    @GetMapping("/sortBy")
+    String CheckFloors(@RequestParam String type,@RequestParam String admin_id) throws JsonProcessingException {
+        return floorService.checkFloors(type,admin_id);
     }
 
-    @PostMapping("/Detail")
-    String GetTheFloor(@RequestBody Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return floorService.getTheFloor(frontEndData,session);
+    @GetMapping("/detail")
+    String GetTheFloor(@RequestParam String comment_id , @RequestParam String admin_id) throws JsonProcessingException {
+        return floorService.getTheFloor(comment_id,admin_id);
     }
 
-    @PostMapping("/Submit")
-    String CheckResult(@RequestBody Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return floorService.checkResult(frontEndData,session);
+    @PostMapping("/submit")
+    String CheckResult(@RequestBody Map<String, Object> frontEndData) throws JsonProcessingException {
+        return floorService.checkResult(frontEndData);
     }
 }

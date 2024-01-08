@@ -8,9 +8,9 @@ import java.util.Map;
 
 
 public interface ReportService {
-    String getReports(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String getReports(String type,String admin_id) throws JsonProcessingException;
 
-    String getTheComment(Map<String, Object> frontEndData, HttpSession session) throws JsonProcessingException;
+    String getTheComment(String report_id,String admin_id) throws JsonProcessingException;
 
-    String reportResult(Map<String, Object> frontEndData, HttpSession session)throws JsonProcessingException;
+    String reportResult(Map<String, Object> frontEndData)throws JsonProcessingException;
 }

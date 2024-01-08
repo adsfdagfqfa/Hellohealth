@@ -6,9 +6,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 public interface FloorService {
-    String checkFloors(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String checkFloors(String type,String admin_id) throws JsonProcessingException;
 
-    String getTheFloor(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String getTheFloor(String comment_id,String admin_id) throws JsonProcessingException;
 
-    String checkResult(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException;
+    String checkResult(Map<String, Object> frontEndData) throws JsonProcessingException;
 }

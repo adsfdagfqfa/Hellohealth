@@ -14,25 +14,25 @@ import com.example.demo.service.impl.ReportServiceImpl;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/api/Check/Report")
+@RequestMapping("/api/v1/CheckService/check/report")
 public class CheckCommentsController {
 
     @Autowired
     private ReportService reportService;
 
-    @PostMapping("/SortBy")
-    public String getReports(@RequestBody Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
-        return reportService.getReports(frontEndData,session);
+    @GetMapping("/sortBy")
+    public String getReports(@RequestParam String type,@RequestParam String admin_id) throws JsonProcessingException {
+        return reportService.getReports(type,admin_id);
     }
 
-    @PostMapping("/Detail")
-    String getTheComment(@RequestBody Map<String, Object> frontEndData, HttpSession session) throws JsonProcessingException {
-        return reportService.getTheComment(frontEndData,session);
+    @GetMapping("/detail")
+    String getTheComment(@RequestParam String report_id, @RequestParam String admin_id) throws JsonProcessingException {
+        return reportService.getTheComment(report_id,admin_id);
     }
 
-    @PostMapping("/Submit")
-    String reportResult(@RequestBody Map<String, Object> frontEndData, HttpSession session) throws JsonProcessingException{
-        return reportService.reportResult(frontEndData,session);
+    @PostMapping("/submit")
+    String reportResult(@RequestBody Map<String, Object> frontEndData) throws JsonProcessingException{
+        return reportService.reportResult(frontEndData);
     }
 
 }

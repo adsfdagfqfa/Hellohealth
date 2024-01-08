@@ -40,12 +40,12 @@ public class DoctorServiceImpl implements DoctorService {
     private NotificationMapper notificationMapper;
 
     @Override
-    public String doctorSortBy(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String doctorSortBy(String type,String admin_id) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) admin_id;
             // AdminId = 43;
             if (adminId == null)
             {
@@ -55,7 +55,7 @@ public class DoctorServiceImpl implements DoctorService {
             }
 //            Integer adminId = 42;
             //传入参数
-            String type = frontEndData.get("type").toString();
+            String type = type;
             if (!type.equals("unchecked") && !type.equals("checked"))
             {
                 message.setMessage("type类型错误");
@@ -162,12 +162,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public String doctorDetail(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String doctorDetail(String apply_id,String admin_id) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         try
         {//首先，验证身份
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) admin_id;
             //AdminId = 43;
             if (adminId == null)
             {
@@ -177,7 +177,7 @@ public class DoctorServiceImpl implements DoctorService {
             }
 //            Integer adminId = 42;
             //传入参数
-            Integer apply_id = (Integer) frontEndData.get("apply_id");
+            Integer apply_id = (Integer)apply_id;
             if (apply_id==null)
             {
                 message.setMessage("没有传入参数");
@@ -208,14 +208,14 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public String doctorSubmit(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String doctorSubmit(Map<String, Object> frontEndData) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode (500);
         try
         {//首先，验证身份
             Map<String,Object> data = new HashMap<>();
             data.put("status",false);
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) frontEndData.get("admin_id");
             //AdminId = 43;
             if (adminId == null)
             {

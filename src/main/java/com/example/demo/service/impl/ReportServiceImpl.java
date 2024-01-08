@@ -54,12 +54,12 @@ public class ReportServiceImpl implements ReportService {
 
 
     @Override
-    public String getReports(Map<String, Object> frontEndData,HttpSession session) throws JsonProcessingException {
+    public String getReports(String type,String admin_id) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         try{
             // 验证身份
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) admin_id;
             if (adminId == null) {
                 message.setErrorCode(403);
                 System.out.println("session中没有存Admin ID！");
@@ -68,7 +68,7 @@ public class ReportServiceImpl implements ReportService {
 //            Integer adminId=41;
 
             // 传入参数
-            String type = frontEndData.get("type").toString().toLowerCase();
+            String type = type.toLowerCase();
             if (!type.equals("unchecked") && !type.equals("checked")) {
                 message.setMessage("type类型错误");
                 message.setErrorCode(400);
@@ -121,12 +121,12 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String getTheComment(Map<String, Object> frontEndData, HttpSession session) throws JsonProcessingException {
+    public String getTheComment(String report_id, String admin_id) throws JsonProcessingException {
         Message message = new Message();
         message.setErrorCode(500);
         try {
             // 验证身份
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) admin_id;
             if (adminId == null) {
                 message.setErrorCode(403);
                 System.out.println("session中没有存Admin ID！");
@@ -135,7 +135,7 @@ public class ReportServiceImpl implements ReportService {
 //            Integer adminId=41;
 
             // 传入参数
-            Integer reportId = (Integer)frontEndData.get("report_id");
+            Integer reportId = (Integer)report_id;
             System.out.println("现在查看的细节是关于："+ reportId.toString());
 
             // 从数据库中找到相应对象
@@ -184,14 +184,14 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String reportResult(Map<String,Object> frontEndData, HttpSession session)throws JsonProcessingException{
+    public String reportResult(Map<String,Object> frontEndData)throws JsonProcessingException{
         Message message = new Message();
         message.setErrorCode(500);
         Map<String,Object> data = new HashMap<>();
         data.put("status",false);
         try{
             // 验证身份
-            Integer adminId = (Integer) session.getAttribute("AdminID");
+            Integer adminId = (Integer) frontEndData.get("AdminID");
             if (adminId == null) {
                 message.setErrorCode(403);
                 System.out.println("session中没有存Admin ID！");
